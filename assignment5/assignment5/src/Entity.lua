@@ -41,6 +41,8 @@ function Entity:init(def)
     Update stuff
 ]]
 self.hasReward = true
+self.type = def.type
+self.carryingPot = nil
 end
 
 function Entity:createAnimations(animations)

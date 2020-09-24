@@ -42,7 +42,7 @@ function PlayerWalkState:update(dt)
     EntityWalkState.update(self, dt)
 
     -- if we bumped something when checking collision, check any object collisions
-    if self.bumped then
+    if self.wallBumped then
         if self.entity.direction == 'left' then
             
             -- temporarily adjust position
@@ -109,4 +109,51 @@ function PlayerWalkState:update(dt)
             self.entity.y = self.entity.y - PLAYER_WALK_SPEED * dt
         end
     end
+
+
+
+    if self.objectBump and self.entity.type == 'player' then
+
+    if self.entity.direction == 'left' then
+
+        for k, obj in ipairs(self.dungeon.currentRoom.objects) do
+            if obj.type == 'pot' and self.entity:collides(obj) and self.enitity.type == 'player' then
+                self.entity.x = self.entity.x + (PLAYER_WALK_SPEED *dt) + 5
+            end
+        end
+
+    elseif self.entity.direction == 'up' then
+
+        for k, obj in ipairs(self.dungeon.currentRoom.objects) do
+            if obj.type == 'pot' and self.entity:collides(obj) and self.enitity.type == 'player' then
+                self.entity.y = self.entity.y + (PLAYER_WALK_SPEED *dt) + 5
+            end
+        end
+
+    elseif self.entity.direction == 'right' then
+
+            for k, obj in ipairs(self.dungeon.currentRoom.objects) do
+                if obj.type == 'pot' and self.entity:collides(obj) and self.enitity.type == 'player' then
+                    self.entity.x = self.entity.x + (PLAYER_WALK_SPEED *dt) - 5
+                end
+            end
+
+     else 
+
+          for k, obj in ipairs(self.dungeon.currentRoom.objects) do
+               if obj.type == 'pot' and self.entity:collides(obj) and self.enitity.type == 'player' then
+                 self.entity.y = self.entity.y + (PLAYER_WALK_SPEED *dt) - 5
+              end
+          end
+
+
+
+         end
+        end
+
+    end
+
+
+
+
 end

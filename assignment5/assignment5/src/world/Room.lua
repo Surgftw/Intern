@@ -8,7 +8,7 @@
 
 Room = Class{}
 
-function Room:init(player)
+function Room:init(player, dungeon)
     self.width = MAP_WIDTH
     self.height = MAP_HEIGHT
 
@@ -32,7 +32,7 @@ function Room:init(player)
 
     -- reference to player for collisions, etc.
     self.player = player
-
+    self.dungeon = dungeon
     -- used for centering the dungeon rendering
     self.renderOffsetX = MAP_RENDER_OFFSET_X
     self.renderOffsetY = MAP_RENDER_OFFSET_Y
@@ -65,6 +65,7 @@ function Room:generateEntities()
             height = 16,
 
             health = 1
+            type = ENTITY_DEFS[type].type
         })
 
         self.entities[i].stateMachine = StateMachine {
@@ -104,6 +105,23 @@ function Room:generateObjects()
             gSounds['door']:play()
         end
     end
+
+
+for i = 1, 10 do
+    local pot = GameObject(
+    GAME_OBJECT_DEFS['pot'],
+    math.random(MAP_RENDER_OFFSET_X + TILE_SIZE, VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
+    math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE, VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
+)
+    table.insert(self.objects, pot)
+
+    )
+
+
+
+
+
+
 end
 
 --[[

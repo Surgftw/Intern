@@ -23,17 +23,27 @@ function PlayState:init()
         health = 6,
 
         -- rendering and collision offset for spaced sprites
-        offsetY = 5
+        offsetY = 5,
+
+
+
+        type = ENTITY_DEFS['player'].type,
+        carryingPot = nil
+
+
     }
 
     self.dungeon = Dungeon(self.player)
-    self.currentRoom = Room(self.player)
+    self.currentRoom = Room(self.player, self.dungeon)
     
     self.player.stateMachine = StateMachine {
         ['walk'] = function() return PlayerWalkState(self.player, self.dungeon) end,
         ['idle'] = function() return PlayerIdleState(self.player) end,
-        ['swing-sword'] = function() return PlayerSwingSwordState(self.player, self.dungeon) end
-    }
+        ['swing-sword'] = function() return PlayerSwingSwordState(self.player, self.dungeon) end,
+        ['pot-lift'] = function() return PlayerPotLiftState(self.player, self.dungeon) end,
+        ['pot-walk'] = function() return PlayerPotWalkState(self.player, self.dungeon) end,
+        ['pot-walk-idle'] = function() return PlayerPotWalkIdleState(self.player, self.dungeon) end
+            }
     self.player:changeState('idle')
 end
 

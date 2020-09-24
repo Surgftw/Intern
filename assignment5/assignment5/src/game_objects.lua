@@ -38,7 +38,20 @@ GAME_OBJECT_DEFS = {
             },
         }
     }
-
+    ['pot'] = {
+        type = 'heart',
+        texture = 'tiles',
+        frame = 15,
+        width = 16,
+        height = 16,
+        solid = true,
+        defaultState = 'exist',
+        states = {
+            ['exist'] = {
+                frame = 15
+            },
+        }
+    }
 
 
 
